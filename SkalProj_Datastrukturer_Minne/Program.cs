@@ -202,7 +202,7 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineStack()
         {
             /*
-             * Loop this method until the user inputs something to exit to main menue.
+             * Loop this method until the user inputs something to exit to main menu.
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
@@ -263,8 +263,65 @@ namespace SkalProj_Datastrukturer_Minne
              * Use this method to check if the paranthesis in a string is Correct or incorrect.
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
-             */
+            */
+            //1.Skapa med hjälp av er nya kunskap funktionalitet för att kontrollera en välformad
+            //sträng på papper.Du ska använda dig av någon eller några av de datastrukturer vi
+            //precis gått igenom.Vilken datastruktur använder du?
 
+            //Jag använder en stack. Med den kan jag bara tillåta en push av en vänsterparentes ")" om det finns en högerparentes innan "(" och
+            //för varje gång det finns en högerparentes innan så cancelerar den vänsterparentesen. Om det finns någon höger eller vänsterparentes kvar
+            //när vi är klara så har något gått fel och det är en inkorrekt sträng.
+
+            //2.Implementera funktionaliteten i metoden CheckParantheses . Låt programmet läsa
+            //in en sträng från användaren och returnera ett svar som reflekterar huruvida
+            //strängen är välformad eller ej.
+            Stack<char> theCharacterStack = new Stack<char>();
+            Console.WriteLine("Please navigate through the menu:"
+            + "\n1. Insert a string for inspection"
+            + "\n0. Exit the application");
+            string input = Console.ReadLine();
+            char nav = input[0];
+            string value = input.Substring(1);
+            //int leftParenthesis = 0;
+            //int rightParenthesis = 0;
+            switch (nav)
+            {
+                case '1':
+                    Console.WriteLine("Please insert the string you would like to inspect:");
+                    string constrolString = Console.ReadLine();
+                    foreach (var item in constrolString.ToCharArray())
+                    {
+                        if (item.ToString() == "(")
+                        {
+                            theCharacterStack.Push(item); 
+                        }
+                        if (item.ToString() == ")")
+                        {
+                            if (theCharacterStack.Count > 0)
+                            {
+                                theCharacterStack.Pop(); ;
+                            }
+                        }
+                    }
+                    if (theCharacterStack.Count > 0)
+                    {
+                        Console.WriteLine($"String is incorrect. I still have a {theCharacterStack.Peek()} in the Stack.\r\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("The stack is empty so the string is correct.\r\n");
+                    }
+                    break;
+
+
+                case '0':
+                    Console.WriteLine("Ending application");
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Navigator error. Did you read the instructions carefully?\r\n");
+                    break;
+            }
         }
 
     }
