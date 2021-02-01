@@ -268,7 +268,7 @@ namespace SkalProj_Datastrukturer_Minne
             //sträng på papper.Du ska använda dig av någon eller några av de datastrukturer vi
             //precis gått igenom.Vilken datastruktur använder du?
 
-            //Jag använder en stack. Med den kan jag bara tillåta en push av en vänsterparentes ")" om det finns en högerparentes innan "(" och
+            //Jag använder en stack. Med den kan pusha vänsterparenteser ")" om det finns en högerparentes innan "(" och
             //för varje gång det finns en högerparentes innan så cancelerar den vänsterparentesen. Om det finns någon höger eller vänsterparentes kvar
             //när vi är klara så har något gått fel och det är en inkorrekt sträng.
 
