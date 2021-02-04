@@ -33,7 +33,8 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n1. Examine a List"
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
-                    + "\n4. CheckParanthesis"
+                    + "\n4. Check Paranthesis"
+                    + "\n5. Rekursion och Iteration"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -63,6 +64,10 @@ namespace SkalProj_Datastrukturer_Minne
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
                      */
+                    case '5':
+                        RecurseAndIterate();
+                        break;
+                        
                     case '0':
                         Environment.Exit(0);
                         break;
@@ -324,6 +329,183 @@ namespace SkalProj_Datastrukturer_Minne
             }
         }
 
+        static void RecurseAndIterate()
+        {
+            Console.WriteLine("Recursion and Iteration");
+
+        //FRÅGA
+        //Illustrera förloppen för RecursiveOdd(1), RecursiveOdd(3) och RecursiveOdd(5) på
+        //papper för att förstå den rekursiva loopen.
+
+        //SVAR
+        //Funktionen körs så att vi repeterar antalet gånger som man skickar in.
+        //i första fallet med 1 får vi 1 + 2, i andra fallet med 3 får vi 3 repetitioner dvs 1 + 2 = 3 + 2 = 5 + 2 = 7
+        //och i sista fallet med 5 får vi 
+        //1 + 2
+        //3 + 2
+        //5 + 2
+        //7 + 2
+        //9 + 2 = 11
+
+        //FRÅGA
+        //1.Illustrera på papper förloppen för IterativeOdd(1) , IterativeOdd(3) och
+        //IterativeOdd(5) för att förstå iterationen.
+        //skicka in antalet repetitioner
+        //om repetitionen är 0, dvs har gått klart antalet iterationer, returnera 1
+        //börja med att sätta result till 1. Vi får då alltid ett udda tal när vi
+        //sedan itererar på antalet gånger som vi bett om och adderar 2 till det.
+        //IterativeOdd(1) = in med 1, initiera result till 1 och lägg på 2 = 3
+        //IterativeOdd(3) = in med 3, initiera result till 1 och loopa sedan 3ggr result med +2 = 7
+        //IterativeOdd(3) = in med 3, initiera result till 1 och loopa sedan 5ggr result med +2 = 11
+
+        //Fråga:
+        //Utgå ifrån era nyvunna kunskaper om iteration, rekursion och minneshantering.Vilken av
+        //ovanstående funktioner är mest minnesvänlig och varför?
+        //Rekursion tar upp mer minne då den lägger till stacken hela tiden (men det var jag tvungen att googla)
+
+            Console.WriteLine("Please navigate through the menu:"
+            + "\n1. Insert a number to run with RecursiveOdd"
+            + "\n2. Insert a number to run with RecursiveEven"
+            + "\n3. Insert a number to run with FibonnaciCounter-Recursive"
+            + "\n4. Insert a number to run with IterativeOdd"
+            + "\n5. Insert a number to run with IterativeEven"
+            + "\n6. Insert a number to run with FibonnaciCounter-Iterative"
+            + "\n0. Exit the application");
+
+            string input = Console.ReadLine();
+            char nav = input[0];
+            string value = input.Substring(1);
+            //int leftParenthesis = 0;
+            //int rightParenthesis = 0;
+            switch (nav)
+            {
+                case '1':
+                    do
+                    {
+                        int num = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine(RecursiveOdd(num));
+                        Console.WriteLine("Insert a number to run with RecursiveOdd:");
+                    } while (true);
+                case '2':
+                    do
+                    {
+                        int num = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine(RecursiveEven(num) + "\r\n");
+                        Console.WriteLine("Insert a number to run with RecursiveEven:");
+                    } while (true);
+                case '3':
+                    do
+                    {
+                        int num = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine(FibonnaciCounter(num));
+                        Console.WriteLine("Insert a number to run with FibonnaciCounterR:");
+                    } while (true);
+                case '4':
+                    do
+                    {
+                        int num = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine(IterativeOdd(num));
+                        Console.WriteLine("Insert a number to run with IterativeOdd:");
+                    } while (true);
+                case '5':
+                    do
+                    {
+                        int num = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine(IterativeOdd(num));
+                        Console.WriteLine("Insert a number to run with IterativeOdd:");
+                    } while (true);
+                case '6':
+                    do
+                    {
+                        int num = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine(FibonnaciCounter(num));
+                        Console.WriteLine("Insert a number to run with FibonnaciCounterI:");
+                    } while (true);
+                case '0':
+                    Console.WriteLine("Ending application");
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Navigator error. Did you read the instructions carefully?\r\n");
+                    break;
+            }
+        }
+
+        public static int myVar;
+
+        private static int RecursiveOdd(int n)
+        {
+            if (n == 0)
+            {
+                return 1;
+            }
+            myVar = RecursiveOdd(n - 1);
+            return myVar + 2;
+            //return (RecursiveOdd(n - 1) + 2);
+        }
+        private static int RecursiveEven(int n)
+        {
+            if (n == 0)
+            {
+                return 2;
+            }
+            myVar = RecursiveEven(n-1);
+            return myVar + 2;
+        }
+        private static int FibonnaciCounter(int n)
+        {
+            if (n <= 2)
+                return 1;
+            else
+                return FibonnaciCounter(n - 1) + FibonnaciCounter(n - 2);
+        }
+        private static int IterativeOdd(int n)
+        {
+            if (n == 0)
+            {
+                return 1;
+            }
+            int result = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                result += 2;
+            }
+            return result;
+        }
+        private static int IterativeEven(int n)
+        {
+            if (n == 0)
+            {
+                return 1;
+            }
+            int result = 2;
+            for (int i = 1; i <= n; i++)
+            {
+                result += 2;
+            }
+            return result;
+        }
+        private static int FibonnaciCounterI(int n)
+        {
+            //if (n <= 2)
+            //    return 1;
+            //else
+            //    return FibonnaciCounter(n - 1) + FibonnaciCounter(n - 2);
+            if (n <= 2)
+            {
+                return 1;
+            }
+            int result = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                result += 2;
+                for (int x = 1; x <= result; i++)
+                {
+                    result += 2;
+                }
+            }
+            return result;
+        }
     }
 }
 
